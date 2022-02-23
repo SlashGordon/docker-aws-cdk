@@ -1,0 +1,42 @@
+
+name: Update Version
+
+on:
+  schedule:
+  - cron: "0 0 * * *"
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: "🔌  Checkout"
+        uses: actions/checkout@v2
+      - name: "🔨 Get version"
+        id: git
+        run: echo ::set-output name=version::$(cat VERSION)
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: "🔨 Install npm tool"
+        run: npm install compare-semver --save
+      - name: "🔨 Get aws-cdk versions"
+        id: aws
+        run: echo ::set-output name=cdkversions::$(npm view aws-cdk@1 version | tail -n1 | sed -nre 's/^[^0-9]*(([0-9]+\.)*[0-9]+).*/\1/p')
+      - name: "🔨 Compare versions"
+        id: compare
+        run: echo ::set-output name=compare::$(semver ${{ steps.git.outputs.version }} ${{ steps.aws.outputs.cdkversions }} | tail -n1)
+      - name: "🔨 Publish new version"
+        if: ${{ steps.compare.outputs.compare }} == ${{ steps.aws.outputs.cdkversions }} && {{ steps.aws.outputs.cdkversions }} != ${{ steps.git.outputs.version }}
+        run: printf "${{ steps.aws.outputs.cdkversions }}" > VERSION
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: 'fix: update version'
+          title: 'bump aws-cdk version from ${{ steps.git.outputs.version }} to ${{ steps.aws.outputs.cdkversions }}'
+          body: |
+            Auto-generated PR by update.yaml workflow
+          labels: Cron
+          branch-suffix: timestamp
+          branch: feature/fix_update_version
+          base: main
