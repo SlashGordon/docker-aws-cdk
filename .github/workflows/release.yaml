@@ -22,21 +22,23 @@ jobs:
 
       - name: "🔨 Set up Docker Buildx"
         uses: docker/setup-buildx-action@v1
-
+      - name: "🔨 Get version"
+        id: vars
+        run: echo ::set-output name=version::$(cat VERSION)
       - name: "🔨 Publish aws cdk"
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: slashgordon/aws-cdk:$(cat VERSION),slashgordon/aws-cdk:latest
+          tags: slashgordon/aws-cdk:${{ steps.vars.outputs.version }},slashgordon/aws-cdk:latest
       - name: "🚀 (Github) Release  🚀"
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "v$(cat VERSION)"
+          automatic_release_tag: "v${{ steps.vars.outputs.version }}"
           prerelease: false
-          title: "AWS-CDK Docker $(cat VERSION)"
+          title: "AWS-CDK Docker ${{ steps.vars.outputs.version }}"
           files: |
             Dockerfile
             VERSION
