@@ -1,11 +1,14 @@
 ARG ALPINE_VERSION=3.13
-ARG AWS_CDK_VERSION=1.105.0
+
 FROM alpine:${ALPINE_VERSION}
 
+ADD VERSION /root/VERSION
+RUN AWS_CDK_VERSION="$(cat /root/VERSION)"
 RUN apk -v --no-cache --update add \
         nodejs \
         npm \
         python3 \
+        py3-pip \
         ca-certificates \
         groff \
         less \

@@ -4,16 +4,16 @@ Containerised AWS CDK to ensure consistent local development and simple CD pipel
 ## Usage
 Run as a command using `cdk` as entrypoint:
 
-    docker run --rm --entrypoint cdk contino/aws-cdk --version
+    docker run --rm --entrypoint cdk slashgordon/aws-cdk --version
 
 Run as a shell and mount `.aws` folder and current directory as volumes:
 
-    docker run --rm -it -v ~/.aws:/root/.aws -v $(pwd):/opt/app contino/aws-cdk bash
+    docker run --rm -it -v ~/.aws:/root/.aws -v $(pwd):/opt/app slashgordon/aws-cdk bash
 
 Using docker-compose:
 
     cdk:
-        image: contino/aws-cdk
+        image: slashgordon/aws-cdk
         env_file: .env
         entrypoint: aws
         working_dir: /opt/app
@@ -72,5 +72,5 @@ To update this container with a newer version of the AWS CDK:
 
 ## Related Projects
 
-- [docker-aws-cli](https://github.com/contino/docker-aws-cli)
-- [docker-terraform](https://github.com/contino/docker-terraform)
+- [docker-aws-cli](https://github.com/slashgordon/docker-aws-cli)
+- [docker-terraform](https://github.com/slashgordon/docker-terraform)
