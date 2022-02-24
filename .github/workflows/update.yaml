@@ -7,7 +7,7 @@ on:
 
 jobs:
   release:
-    name: Release
+    name: Update Version
     runs-on: ubuntu-latest
     steps:
       - name: "🔌  Checkout"
@@ -36,7 +36,7 @@ jobs:
           title: 'bump aws-cdk version from ${{ steps.git.outputs.version }} to ${{ steps.aws.outputs.cdkversions }}'
           body: |
             Auto-generated PR by update.yaml workflow
-          labels: Cron
+          labels: automerge
           branch-suffix: timestamp
           branch: feature/fix_update_version
           base: main
