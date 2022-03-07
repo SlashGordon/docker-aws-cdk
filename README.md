@@ -4,16 +4,16 @@ Containerised AWS CDK to ensure consistent local development and simple CD pipel
 ## Usage
 Run as a command using `cdk` as entrypoint:
 
-    docker run --rm --entrypoint cdk emetriq/aws-cdk --version
+    docker run --rm --entrypoint cdk slashgordon/aws-cdk --version
 
 Run as a shell and mount `.aws` folder and current directory as volumes:
 
-    docker run --rm -it -v ~/.aws:/root/.aws -v $(pwd):/opt/app emetriq/aws-cdk bash
+    docker run --rm -it -v ~/.aws:/root/.aws -v $(pwd):/opt/app slashgordon/aws-cdk bash
 
 Using docker-compose:
 
     cdk:
-        image: emetriq/aws-cdk
+        image: slashgordon/aws-cdk
         env_file: .env
         entrypoint: aws
         working_dir: /opt/app
@@ -53,8 +53,8 @@ container.
 
 ## Related Projects
 
-- [docker-aws-cli](https://github.com/emetriq/docker-aws-cli)
-- [docker-terraform](https://github.com/emetriq/docker-terraform)
+- [docker-aws-cli](https://github.com/slashgordon/docker-aws-cli)
+- [docker-terraform](https://github.com/slashgordon/docker-terraform)
 
 ## Credits
 

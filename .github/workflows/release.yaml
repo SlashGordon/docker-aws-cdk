@@ -31,7 +31,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: emetriq/aws-cdk:${{ steps.vars.outputs.version }},emetriq/aws-cdk:latest
+          tags: slashgordon/aws-cdk:${{ steps.vars.outputs.version }},slashgordon/aws-cdk:latest
       - name: "🚀 (Github) Release  🚀"
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
