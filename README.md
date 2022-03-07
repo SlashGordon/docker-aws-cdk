@@ -1,4 +1,4 @@
-## Docker AWS CDK
+# Docker AWS CDK
 Containerised AWS CDK to ensure consistent local development and simple CD pipelines.
 
 ## Usage
@@ -55,3 +55,7 @@ container.
 
 - [docker-aws-cli](https://github.com/emetriq/docker-aws-cli)
 - [docker-terraform](https://github.com/emetriq/docker-terraform)
+
+## Credits
+
+Strongly inspired by[contino/docker-aws-cdk](https://github.com/contino/docker-aws-cdk) project.
