@@ -1,3 +1,5 @@
+[![Release](https://github.com/SlashGordon/docker-aws-cdk/actions/workflows/release.yaml/badge.svg)](https://github.com/SlashGordon/docker-aws-cdk/actions/workflows/release.yaml)
+
 # Docker AWS CDK
 Containerised AWS CDK to ensure consistent local development and simple CD pipelines.
 
