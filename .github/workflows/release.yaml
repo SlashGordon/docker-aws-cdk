@@ -31,6 +31,8 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
+          build-args: |
+            AWS_CDK_VERSION=${{ steps.vars.outputs.version }}
           tags: slashgordon/aws-cdk:${{ steps.vars.outputs.version }},slashgordon/aws-cdk:latest
       - name: "🚀 (Github) Release  🚀"
         uses: "marvinpinto/action-automatic-releases@latest"
