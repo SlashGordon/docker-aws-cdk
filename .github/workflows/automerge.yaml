@@ -1,12 +1,23 @@
-name: Automerge
-on: pull_request
+name: Auto approve and merge PRs by SlashGordon
+
+on:
+  pull_request_target: {}
+
 jobs:
-  automerge:
+  dependabot:
+    name: Auto Approve and merge PR by SlashGordon
+    if: github.event.issue.user.login  == 'SlashGordon'
     runs-on: ubuntu-latest
     steps:
-      - name: automerge
-        uses: pascalgn/automerge-action@v0.14.3
+      - name: Auto approve
+        uses: hmarr/auto-approve-action@v2.2.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Auto merge
+        uses: pascalgn/automerge-action@v0.15.2
         env:
-          # Allows this merge to trigger other actions
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          MERGE_METHOD: squash
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MERGE_LABELS: automerge
+          MERGE_RETRIES: "30"
+          MERGE_RETRY_SLEEP: "30000"
