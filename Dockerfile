@@ -6,6 +6,7 @@ ARG AWS_CDK_VERSION
 ENV CDK_VERSION ${AWS_CDK_VERSION}
 RUN apk -v --no-cache --update add \
         nodejs \
+        docker-cli \
         npm \
         python3 \
         py3-pip \
