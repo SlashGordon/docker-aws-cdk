@@ -15,9 +15,15 @@ on:
       - submitted
 
 jobs:
+  pre:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo        
+        uses: actions/checkout@v2
+      - run: echo " Issuer ${{ github.event.pull_request.user.login }} "
   dependabot:
     name: Auto Approve and merge PR by SlashGordon
-    if: github.event.issue.user.login  == 'SlashGordon'
+    if: github.event.pull_request.user.login  == 'SlashGordon'
     runs-on: ubuntu-latest
     steps:
       - name: Auto approve
