@@ -74,6 +74,7 @@ RUN pip install --upgrade pip \
         aws-cdk.aws-sns==${AWS_CDK_VERSION} \
         aws-cdk.aws-sns-subscriptions==${AWS_CDK_VERSION} \
         aws-cdk.aws-sqs==${AWS_CDK_VERSION} \
-        aws-cdk.aws-ssm==${AWS_CDK_VERSION}
+        aws-cdk.aws-ssm==${AWS_CDK_VERSION} \
+        cdk-ecr-deployment==1.0.2
 
 CMD ["cdk", "--version"]
