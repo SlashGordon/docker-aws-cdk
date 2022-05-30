@@ -1,18 +1,6 @@
 name: Auto approve and merge PRs by SlashGordon
 
-on:
-  pull_request:
-    types:
-      - labeled
-      - synchronize
-      - opened
-      - edited
-      - ready_for_review
-      - reopened
-      - unlocked
-  pull_request_review:
-    types:
-      - submitted
+on: pull_request
 
 jobs:
   pre:
