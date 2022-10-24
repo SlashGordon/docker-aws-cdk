@@ -1,6 +1,6 @@
 name: Auto approve and merge PRs by SlashGordon
 
-on: pull_request
+on: pull_request_target
 
 jobs:
   pre:
@@ -8,14 +8,14 @@ jobs:
     steps:
       - name: Check out repo        
         uses: actions/checkout@v2
-      - run: echo " Issuer ${{ github.event.pull_request.user.login }} "
+      - run: echo " Issuer ${{ github.event.pull_request.user.login }} -- ${{ github.actor }}"
   dependabot:
     name: Auto Approve and merge PR by SlashGordon
-    if: github.event.pull_request.user.login  == 'SlashGordon'
+    if: github.event.pull_request.user.login  == 'SlashGordon' || github.actor == 'SlashGordon' 
     runs-on: ubuntu-latest
     steps:
       - name: Auto approve
-        uses: hmarr/auto-approve-action@v2.2.1
+        uses: hmarr/auto-approve-action@v3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
